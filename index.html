@@ -32,8 +32,8 @@ body {
   height: 100vh;
   max-width: 1100px;
   max-height: 720px;
-  background: #1d2b20;
   overflow: hidden;
+  background: #75c96b;
   box-shadow: 0 0 30px #000;
 }
 
@@ -41,7 +41,6 @@ canvas {
   display: block;
   width: 100%;
   height: 100%;
-  background: #75c96b;
 }
 
 #hud {
@@ -54,15 +53,15 @@ canvas {
 
 .panel {
   background: rgba(20, 25, 35, 0.88);
-  border: 2px solid rgba(255, 255, 255, 0.25);
+  border: 2px solid rgba(255,255,255,.25);
   border-radius: 14px;
   padding: 10px 13px;
   margin-bottom: 8px;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 4px 14px rgba(0,0,0,.25);
 }
 
 #objective {
-  max-width: 390px;
+  max-width: 420px;
   font-size: 15px;
   line-height: 1.35;
 }
@@ -78,12 +77,12 @@ canvas {
   right: 5%;
   bottom: 22px;
   z-index: 20;
-  background: rgba(16, 19, 30, 0.96);
+  background: rgba(16,19,30,.96);
   border: 3px solid white;
   border-radius: 18px;
   padding: 15px;
   display: none;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 8px 30px rgba(0,0,0,.5);
 }
 
 #speaker {
@@ -113,10 +112,9 @@ canvas {
   margin-top: 10px;
 }
 
-#continueBtn:hover,
-#startBtn:hover,
-#restartBtn:hover {
-  filter: brightness(1.08);
+#startBtn {
+  font-size: 19px;
+  padding: 14px 25px;
 }
 
 #startScreen,
@@ -131,8 +129,8 @@ canvas {
   align-items: center;
   text-align: center;
   background: linear-gradient(
-    rgba(18, 25, 35, 0.88),
-    rgba(20, 30, 45, 0.94)
+    rgba(18,25,35,.88),
+    rgba(20,30,45,.94)
   );
   padding: 25px;
 }
@@ -143,13 +141,13 @@ canvas {
 }
 
 h1 {
-  font-size: clamp(28px, 5vw, 52px);
+  font-size: clamp(28px,5vw,52px);
   margin: 0 0 12px;
   text-shadow: 0 4px 10px #000;
 }
 
 .subtitle {
-  max-width: 680px;
+  max-width: 700px;
   font-size: 18px;
   line-height: 1.5;
   color: #e8edf7;
@@ -178,34 +176,30 @@ h1 {
   width: 58px;
   height: 48px;
   margin: 3px;
-  border: 2px solid rgba(255,255,255,0.5);
+  border: 2px solid rgba(255,255,255,.5);
   border-radius: 12px;
-  background: rgba(20,25,35,0.72);
+  background: rgba(20,25,35,.72);
   color: white;
   font-size: 22px;
   font-weight: bold;
 }
 
-@media (max-width: 800px) {
+@media (max-width:800px) {
   #touch {
-    display: block;
+    display:block;
   }
 
   #objective {
-    max-width: 280px;
-    font-size: 12px;
+    max-width:280px;
+    font-size:12px;
   }
 
   .panel {
-    padding: 7px 9px;
-  }
-
-  .bigDuck {
-    font-size: 65px;
+    padding:7px 9px;
   }
 
   #text {
-    font-size: 15px;
+    font-size:15px;
   }
 }
 </style>
@@ -234,13 +228,9 @@ h1 {
 
 <div id="dialogue">
 
-  <div id="speaker">
-    Character
-  </div>
+  <div id="speaker">Character</div>
 
-  <div id="text">
-    ...
-  </div>
+  <div id="text">...</div>
 
   <button id="continueBtn">
     Continue ▶
@@ -250,18 +240,14 @@ h1 {
 
 <div id="startScreen">
 
-  <div class="bigDuck">
-    🦆🍇
-  </div>
+  <div class="bigDuck">🦆🍇</div>
 
-  <h1>
-    Duck's Magical Grape Quest
-  </h1>
+  <h1>Duck's Magical Grape Quest</h1>
 
   <div class="subtitle">
-    The duck wants grapes! Find the magical grapes on the mountain,
-    learn the secret from the villagers, and protect the old man
-    on the dangerous journey.
+    The duck wants grapes! Find the magical grapes on the distant
+    mountain, learn the secret from the villagers, and protect the
+    old man on the dangerous journey.
   </div>
 
   <button id="startBtn">
@@ -272,17 +258,13 @@ h1 {
 
 <div id="gameOver">
 
-  <div class="bigDuck">
-    🧓💔
-  </div>
+  <div class="bigDuck">🧓💔</div>
 
-  <h1>
-    The Old Man Was Defeated
-  </h1>
+  <h1>The Old Man Was Defeated</h1>
 
   <div class="subtitle">
-    Don't give up! Restart and return to the moment when Duck
-    first talks to the old man.
+    Don't give up! Return to the moment when Duck first talks
+    to the old man.
   </div>
 
   <button id="restartBtn">
@@ -293,13 +275,9 @@ h1 {
 
 <div id="part2">
 
-  <div class="bigDuck">
-    🌫️🍇
-  </div>
+  <div class="bigDuck">🌫️🍇</div>
 
-  <h1>
-    PART 2
-  </h1>
+  <h1>PART 2</h1>
 
   <div class="subtitle">
     The magical grape is within reach...
@@ -349,12 +327,12 @@ const part2Screen = document.getElementById('part2');
 const startBtn = document.getElementById('startBtn');
 const restartBtn = document.getElementById('restartBtn');
 
-const WORLD = {
-  width: 2400,
-  height: 1600
-};
-
 const keys = Object.create(null);
+
+const WORLD = {
+  width: 5200,
+  height: 3000
+};
 
 let camera = {
   x: 0,
@@ -362,6 +340,7 @@ let camera = {
 };
 
 let lastTime = 0;
+
 let gameStarted = false;
 let gameState = 'intro';
 
@@ -370,29 +349,44 @@ let dialogueLines = [];
 let dialogueIndex = 0;
 let dialogueCallback = null;
 
+let villagersSpoken = 0;
 let endingStarted = false;
 let attackCooldown = 0;
 
-let villagersSpoken = 0;
-
 const duck = {
   x: 300,
-  y: 1000,
+  y: 1500,
   radius: 22,
-  speed: 3.3,
+  speed: 3.5,
   hp: 100,
   maxHp: 100,
   invuln: 0
 };
 
 const oldMan = {
-  x: 850,
-  y: 700,
+  x: 950,
+  y: 1450,
   radius: 22,
-  speed: 0.55,
+  speed: 1.15,
   hp: 150,
   maxHp: 150,
   alive: true
+};
+
+/*
+  The mountain is now VERY far away.
+*/
+const mountain = {
+  x: 4550,
+  y: 500,
+  w: 500,
+  h: 700
+};
+
+const grape = {
+  x: 4790,
+  y: 690,
+  active: true
 };
 
 const swordLevels = [
@@ -425,138 +419,111 @@ const swordLevels = [
 let swordIndex = 0;
 let trust = 0;
 
+/*
+  Houses are placed beside each villager.
+*/
 const villagers = [
 
   {
     name: 'Farmer',
     emoji: '🧑‍🌾',
     x: 500,
-    y: 500,
+    y: 1050,
     talked: false,
-    line: 'I saw travelers heading toward the hills, but I do not know where the mountain is.'
+    house: {
+      x: 400,
+      y: 850,
+      w: 220,
+      h: 150
+    },
+    line:
+      'I saw travelers heading toward the distant hills, but I do not know where the mountain is.'
   },
 
   {
     name: 'Baker',
     emoji: '👩‍🍳',
-    x: 750,
-    y: 450,
+    x: 950,
+    y: 900,
     talked: false,
-    line: 'A mountain? Hmm... I have heard stories, but I have never been there.'
+    house: {
+      x: 850,
+      y: 700,
+      w: 220,
+      h: 150
+    },
+    line:
+      'A mountain? Hmm... I have heard stories, but I have never been there.'
   },
 
   {
     name: 'Fisher',
     emoji: '🎣',
-    x: 1100,
-    y: 500,
+    x: 1400,
+    y: 1050,
     talked: false,
-    line: 'The river leads toward the hills, but I cannot tell you which mountain hides the magic grapes.'
+    house: {
+      x: 1300,
+      y: 850,
+      w: 220,
+      h: 150
+    },
+    line:
+      'The river leads toward the hills, but I cannot tell you which mountain hides the magic grapes.'
   },
 
   {
     name: 'Shopkeeper',
     emoji: '🧑‍💼',
-    x: 1400,
-    y: 600,
+    x: 1850,
+    y: 900,
     talked: false,
-    line: 'Everyone asks about that mountain. I only know that an old man once traveled there.'
+    house: {
+      x: 1750,
+      y: 700,
+      w: 220,
+      h: 150
+    },
+    line:
+      'Everyone asks about that mountain. I only know that an old man once traveled there.'
   },
 
   {
     name: 'Old Man',
     emoji: '🧓',
-    x: 850,
-    y: 700,
+    x: 950,
+    y: 1450,
     special: true,
     talked: false,
-    line: 'I have been to that mountain. Follow me, young duck, and I will show you the way.'
+    house: {
+      x: 850,
+      y: 1250,
+      w: 220,
+      h: 150
+    },
+    line:
+      'I have been to that mountain. Follow me, young duck, and I will show you the way.'
   }
 
 ];
 
 const obstacles = [
 
-  {
-    x: 420,
-    y: 850,
-    w: 150,
-    h: 55,
-    type: 'rock'
-  },
-
-  {
-    x: 650,
-    y: 1050,
-    w: 190,
-    h: 55,
-    type: 'rock'
-  },
-
-  {
-    x: 1050,
-    y: 850,
-    w: 90,
-    h: 160,
-    type: 'tree'
-  },
-
-  {
-    x: 1250,
-    y: 760,
-    w: 180,
-    h: 55,
-    type: 'rock'
-  },
-
-  {
-    x: 1450,
-    y: 1000,
-    w: 90,
-    h: 170,
-    type: 'tree'
-  },
-
-  {
-    x: 1650,
-    y: 700,
-    w: 190,
-    h: 55,
-    type: 'rock'
-  },
-
-  {
-    x: 1850,
-    y: 1050,
-    w: 120,
-    h: 170,
-    type: 'tree'
-  },
-
-  {
-    x: 2000,
-    y: 600,
-    w: 180,
-    h: 55,
-    type: 'rock'
-  }
+  { x: 700, y: 1400, w: 160, h: 60, type: 'rock' },
+  { x: 1100, y: 1250, w: 90, h: 170, type: 'tree' },
+  { x: 1450, y: 1400, w: 180, h: 60, type: 'rock' },
+  { x: 1750, y: 1200, w: 90, h: 180, type: 'tree' },
+  { x: 2150, y: 1450, w: 220, h: 60, type: 'rock' },
+  { x: 2500, y: 1100, w: 100, h: 190, type: 'tree' },
+  { x: 2850, y: 1450, w: 190, h: 60, type: 'rock' },
+  { x: 3200, y: 1150, w: 100, h: 190, type: 'tree' },
+  { x: 3500, y: 1500, w: 230, h: 60, type: 'rock' },
+  { x: 3900, y: 1050, w: 100, h: 190, type: 'tree' },
+  { x: 4200, y: 1450, w: 220, h: 60, type: 'rock' }
 
 ];
 
 let enemies = [];
-
-const mountain = {
-  x: 2140,
-  y: 260,
-  w: 360,
-  h: 430
-};
-
-const grape = {
-  x: 2290,
-  y: 470,
-  active: true
-};
 
 function resetEnemies() {
 
@@ -565,8 +532,8 @@ function resetEnemies() {
     {
       kind: 'Wolf',
       emoji: '🐺',
-      x: 1350,
-      y: 950,
+      x: 2100,
+      y: 1550,
       hp: 35,
       maxHp: 35,
       damage: 10,
@@ -578,12 +545,12 @@ function resetEnemies() {
     {
       kind: 'Boar',
       emoji: '🐗',
-      x: 1600,
-      y: 1050,
+      x: 2700,
+      y: 1250,
       hp: 45,
       maxHp: 45,
       damage: 12,
-      speed: 0.9,
+      speed: .9,
       radius: 22,
       alive: true
     },
@@ -591,12 +558,12 @@ function resetEnemies() {
     {
       kind: 'Wolf',
       emoji: '🐺',
-      x: 1850,
-      y: 850,
+      x: 3300,
+      y: 1500,
       hp: 55,
       maxHp: 55,
       damage: 14,
-      speed: 1.0,
+      speed: 1,
       radius: 20,
       alive: true
     },
@@ -604,12 +571,12 @@ function resetEnemies() {
     {
       kind: 'Bear',
       emoji: '🐻',
-      x: 2050,
-      y: 1000,
+      x: 3950,
+      y: 1350,
       hp: 100,
       maxHp: 100,
       damage: 20,
-      speed: 0.62,
+      speed: .62,
       radius: 28,
       alive: true
     }
@@ -617,7 +584,7 @@ function resetEnemies() {
   ];
 }
 
-function resetWorldForNewGame() {
+function resetWorld() {
 
   gameState = 'village';
 
@@ -627,34 +594,30 @@ function resetWorldForNewGame() {
   dialogueCallback = null;
 
   duck.x = 300;
-  duck.y = 1000;
+  duck.y = 1500;
   duck.hp = 100;
   duck.invuln = 0;
 
-  oldMan.x = 850;
-  oldMan.y = 700;
+  oldMan.x = 950;
+  oldMan.y = 1450;
   oldMan.hp = 150;
   oldMan.alive = true;
 
-  villagers.forEach(function(v) {
+  villagers.forEach(v => {
     v.talked = false;
   });
 
   villagersSpoken = 0;
-
   swordIndex = 0;
   trust = 0;
+  endingStarted = false;
 
   resetEnemies();
-
-  endingStarted = false;
 
   gameOverScreen.style.display = 'none';
   part2Screen.style.display = 'none';
 
-  objectiveEl.textContent =
-    '🎯 Objective: Talk to the villagers and ask them about the mountain. (0/4)';
-
+  updateObjective();
   updateStats();
 }
 
@@ -665,32 +628,23 @@ function beginIntro() {
   startDialogue(
 
     [
-      ['Duck 🦆', 'Hello! Do you have any grapes?'],
+      ['Duck 🦆',
+       'Hello! Do you have any grapes?'],
 
-      [
-        'Lemonade Seller 🍋',
-        'Sorry, little duck. I do not have any grapes.'
-      ],
+      ['Lemonade Seller 🍋',
+       'Sorry, little duck. I do not have any grapes.'],
 
-      [
-        'Mysterious Figure 🌑',
-        'There are magical grapes up at the mountain...'
-      ],
+      ['Mysterious Figure 🌑',
+       'There are magical grapes up at the mountain...'],
 
-      [
-        'Duck 🦆',
-        'Where is the mountain?'
-      ],
+      ['Duck 🦆',
+       'Where is the mountain?'],
 
-      [
-        'Mysterious Figure 🌑',
-        '...'
-      ],
+      ['Mysterious Figure 🌑',
+       '...'],
 
-      [
-        'Narrator 📖',
-        'The mysterious figure disappears into the mist. Duck must search the village for someone who knows the way.'
-      ]
+      ['Narrator 📖',
+       'The mysterious figure disappears into the mist. Duck must search the village for someone who knows the way.']
     ],
 
     function() {
@@ -703,7 +657,7 @@ function beginIntro() {
 
 function startDialogue(lines, callback) {
 
-  if (!Array.isArray(lines) || lines.length === 0) {
+  if (!lines || lines.length === 0) {
     return;
   }
 
@@ -737,11 +691,10 @@ function showDialogueLine() {
   textEl.textContent =
     dialogueLines[dialogueIndex][1];
 
-  if (dialogueIndex === dialogueLines.length - 1) {
-    continueBtn.textContent = 'Close ✨';
-  } else {
-    continueBtn.textContent = 'Continue ▶';
-  }
+  continueBtn.textContent =
+    dialogueIndex === dialogueLines.length - 1
+      ? 'Close ✨'
+      : 'Continue ▶';
 
   dialogueBox.style.display = 'block';
 }
@@ -749,7 +702,6 @@ function showDialogueLine() {
 function finishDialogue() {
 
   dialogueActive = false;
-
   dialogueBox.style.display = 'none';
 
   const callback = dialogueCallback;
@@ -763,13 +715,13 @@ function finishDialogue() {
   }
 }
 
-continueBtn.addEventListener('click', function() {
+continueBtn.addEventListener('click', () => {
 
   if (!dialogueActive) {
     return;
   }
 
-  dialogueIndex += 1;
+  dialogueIndex++;
 
   showDialogueLine();
 
@@ -786,10 +738,7 @@ function talkToVillager(v) {
   }
 
   /*
-    IMPORTANT BUG FIX:
-    Mark the villager as talked-to BEFORE starting
-    the dialogue. This prevents the dialogue from
-    reopening after pressing Continue.
+    This fixes the old Continue bug.
   */
   v.talked = true;
 
@@ -798,25 +747,17 @@ function talkToVillager(v) {
     startDialogue(
 
       [
-        [
-          'Old Man 🧓',
-          'You seek the magical grapes? I have been to the mountain.'
-        ],
+        ['Old Man 🧓',
+         'You seek the magical grapes? I have been to the mountain.'],
 
-        [
-          'Duck 🦆',
-          'Really?! Can you show me where it is?'
-        ],
+        ['Duck 🦆',
+         'Really?! Can you show me where it is?'],
 
-        [
-          'Old Man 🧓',
-          'Follow me. I walk slowly, so stay close. There are dangerous creatures on the road.'
-        ],
+        ['Old Man 🧓',
+         'Follow me. I walk slowly, so stay close. There are dangerous creatures on the road.'],
 
-        [
-          'Duck 🦆',
-          'I will protect you!'
-        ]
+        ['Duck 🦆',
+         'I will protect you!']
       ],
 
       function() {
@@ -824,7 +765,7 @@ function talkToVillager(v) {
         gameState = 'escort';
 
         objectiveEl.textContent =
-          '🎯 Objective: Protect the old man and follow him to the mountain.';
+          '🎯 Objective: Protect the old man and follow him all the way to the distant mountain.';
 
         updateStats();
       }
@@ -834,7 +775,7 @@ function talkToVillager(v) {
     return;
   }
 
-  villagersSpoken += 1;
+  villagersSpoken++;
 
   startDialogue(
 
@@ -872,7 +813,6 @@ function updateObjective() {
 
       objectiveEl.textContent =
         '🎯 Objective: Find the old man and ask him about the mountain.';
-
     }
 
   }
@@ -880,7 +820,7 @@ function updateObjective() {
   if (gameState === 'escort') {
 
     objectiveEl.textContent =
-      '🎯 Objective: Protect the old man and follow him to the mountain.';
+      '🎯 Objective: Protect the old man and follow him to the distant mountain.';
 
   }
 }
@@ -889,22 +829,14 @@ function updateStats() {
 
   const sword = swordLevels[swordIndex];
 
-  let trustGoal;
-
-  if (sword.goal === Infinity) {
-    trustGoal = 'MAX';
-  } else {
-    trustGoal = sword.goal;
-  }
-
   statsEl.innerHTML =
     '❤️ Duck HP: ' +
-    Math.max(0, Math.ceil(duck.hp)) +
+    Math.ceil(duck.hp) +
     '/' +
     duck.maxHp +
 
     '<br>🧓 Old Man HP: ' +
-    Math.max(0, Math.ceil(oldMan.hp)) +
+    Math.ceil(oldMan.hp) +
     '/' +
     oldMan.maxHp +
 
@@ -919,59 +851,61 @@ function updateStats() {
     '<br>🤝 Trust: ' +
     trust +
     '/' +
-    trustGoal;
+    (sword.goal === Infinity
+      ? 'MAX'
+      : sword.goal);
 }
 
-function distance(a, b) {
+function distance(a,b) {
 
   return Math.hypot(
-    a.x - b.x,
-    a.y - b.y
+    a.x-b.x,
+    a.y-b.y
   );
 }
 
-function clamp(value, min, max) {
+function clamp(value,min,max) {
 
   return Math.max(
     min,
-    Math.min(max, value)
+    Math.min(max,value)
   );
 }
 
-function circleRectCollision(circle, rect) {
+function circleRectCollision(circle,rect) {
 
   const closestX =
     clamp(
       circle.x,
       rect.x,
-      rect.x + rect.w
+      rect.x+rect.w
     );
 
   const closestY =
     clamp(
       circle.y,
       rect.y,
-      rect.y + rect.h
+      rect.y+rect.h
     );
 
   const dx =
-    circle.x - closestX;
+    circle.x-closestX;
 
   const dy =
-    circle.y - closestY;
+    circle.y-closestY;
 
   return (
-    dx * dx +
-    dy * dy
-  ) < circle.radius * circle.radius;
+    dx*dx+
+    dy*dy
+  ) < circle.radius*circle.radius;
 }
 
-function blockedAt(x, y, radius) {
+function blockedAt(x,y,radius) {
 
   const test = {
-    x: x,
-    y: y,
-    radius: radius
+    x,
+    y,
+    radius
   };
 
   for (const obstacle of obstacles) {
@@ -989,8 +923,8 @@ function blockedAt(x, y, radius) {
   if (
     x < radius ||
     y < radius ||
-    x > WORLD.width - radius ||
-    y > WORLD.height - radius
+    x > WORLD.width-radius ||
+    y > WORLD.height-radius
   ) {
     return true;
   }
@@ -998,10 +932,13 @@ function blockedAt(x, y, radius) {
   return false;
 }
 
-function moveEntity(entity, dx, dy) {
+function moveEntity(entity,dx,dy) {
 
-  const newX = entity.x + dx;
-  const newY = entity.y + dy;
+  const newX =
+    entity.x+dx;
+
+  const newY =
+    entity.y+dy;
 
   if (
     !blockedAt(
@@ -1010,7 +947,7 @@ function moveEntity(entity, dx, dy) {
       entity.radius
     )
   ) {
-    entity.x = newX;
+    entity.x=newX;
   }
 
   if (
@@ -1020,7 +957,7 @@ function moveEntity(entity, dx, dy) {
       entity.radius
     )
   ) {
-    entity.y = newY;
+    entity.y=newY;
   }
 }
 
@@ -1036,55 +973,47 @@ function handleMovement(dt) {
     return;
   }
 
-  let dx = 0;
-  let dy = 0;
+  let dx=0;
+  let dy=0;
 
   if (
-    keys['ArrowUp'] ||
-    keys['w'] ||
-    keys['W']
-  ) {
-    dy -= 1;
-  }
+    keys.ArrowUp ||
+    keys.w ||
+    keys.W
+  ) dy--;
 
   if (
-    keys['ArrowDown'] ||
-    keys['s'] ||
-    keys['S']
-  ) {
-    dy += 1;
-  }
+    keys.ArrowDown ||
+    keys.s ||
+    keys.S
+  ) dy++;
 
   if (
-    keys['ArrowLeft'] ||
-    keys['a'] ||
-    keys['A']
-  ) {
-    dx -= 1;
-  }
+    keys.ArrowLeft ||
+    keys.a ||
+    keys.A
+  ) dx--;
 
   if (
-    keys['ArrowRight'] ||
-    keys['d'] ||
-    keys['D']
-  ) {
-    dx += 1;
-  }
+    keys.ArrowRight ||
+    keys.d ||
+    keys.D
+  ) dx++;
 
-  if (dx === 0 && dy === 0) {
+  if (dx===0 && dy===0) {
     return;
   }
 
-  const length =
-    Math.hypot(dx, dy) || 1;
+  const len =
+    Math.hypot(dx,dy)||1;
 
   const speed =
-    duck.speed * dt * 60;
+    duck.speed*dt*60;
 
   moveEntity(
     duck,
-    dx / length * speed,
-    dy / length * speed
+    dx/len*speed,
+    dy/len*speed
   );
 }
 
@@ -1104,45 +1033,66 @@ function checkVillagers() {
     }
 
     if (
-      distance(duck, villager) < 62
+      distance(duck,villager)<65
     ) {
+
       talkToVillager(villager);
       break;
     }
   }
 }
 
-function enemyTarget(enemy) {
+/*
+  NEW OLD MAN SYSTEM:
+  He follows Duck instead of running toward
+  the mountain by himself.
+
+  This keeps him close enough that you can
+  always see him.
+*/
+function updateOldMan(dt) {
 
   if (
     gameState !== 'escort' ||
-    !oldMan.alive
+    !oldMan.alive ||
+    dialogueActive
   ) {
-    return null;
+    return;
   }
 
-  const distanceToOldMan =
-    distance(enemy, oldMan);
+  const d =
+    distance(oldMan,duck);
 
-  const distanceToDuck =
-    distance(enemy, duck);
+  const followDistance = 85;
 
-  if (distanceToOldMan < 360) {
-    return oldMan;
+  if (d > followDistance) {
+
+    const dx =
+      duck.x-oldMan.x;
+
+    const dy =
+      duck.y-oldMan.y;
+
+    const len =
+      Math.hypot(dx,dy)||1;
+
+    const speed =
+      oldMan.speed*dt*60;
+
+    moveEntity(
+      oldMan,
+      dx/len*speed,
+      dy/len*speed
+    );
   }
-
-  if (distanceToDuck < 170) {
-    return duck;
-  }
-
-  return null;
 }
 
 function updateEnemies(dt) {
 
   if (
     gameState !== 'escort' ||
-    !oldMan.alive
+    !oldMan.alive ||
+    dialogueActive
   ) {
     return;
   }
@@ -1153,64 +1103,76 @@ function updateEnemies(dt) {
       continue;
     }
 
-    const target =
-      enemyTarget(enemy);
+    const oldManDistance =
+      distance(enemy,oldMan);
+
+    const duckDistance =
+      distance(enemy,duck);
+
+    let target=null;
+
+    if (oldManDistance<400) {
+      target=oldMan;
+    } else if (duckDistance<180) {
+      target=duck;
+    }
 
     if (!target) {
       continue;
     }
 
     const dx =
-      target.x - enemy.x;
+      target.x-enemy.x;
 
     const dy =
-      target.y - enemy.y;
+      target.y-enemy.y;
 
-    const distanceToTarget =
-      Math.hypot(dx, dy) || 1;
+    const len =
+      Math.hypot(dx,dy)||1;
 
     if (
-      distanceToTarget >
-      enemy.radius +
-      target.radius +
+      len >
+      enemy.radius+
+      target.radius+
       8
     ) {
 
       moveEntity(
         enemy,
-        dx / distanceToTarget *
-          enemy.speed *
-          dt *
-          60,
+        dx/len*
+        enemy.speed*
+        dt*
+        60,
 
-        dy / distanceToTarget *
-          enemy.speed *
-          dt *
-          60
+        dy/len*
+        enemy.speed*
+        dt*
+        60
       );
 
-    } else if (target === oldMan) {
+    } else if (target===oldMan) {
 
       oldMan.hp -=
-        enemy.damage * dt;
-
-      if (oldMan.hp <= 0) {
-        oldMan.hp = 0;
-      }
+        enemy.damage*dt;
 
     } else if (
-      target === duck &&
-      duck.invuln <= 0
+      target===duck &&
+      duck.invuln<=0
     ) {
 
-      duck.hp -= enemy.damage;
+      duck.hp -=
+        enemy.damage;
 
-      duck.invuln = 0.8;
-
-      if (duck.hp < 0) {
-        duck.hp = 0;
-      }
+      duck.invuln=.8;
     }
+  }
+
+  if (oldMan.hp<0) {
+    oldMan.hp=0;
+  }
+
+  if (duck.hp<0) {
+    duck.hp=0;
   }
 }
 
@@ -1220,17 +1182,17 @@ function attack() {
     !gameStarted ||
     dialogueActive ||
     gameState !== 'escort' ||
-    attackCooldown > 0
+    attackCooldown>0
   ) {
     return;
   }
 
-  attackCooldown = 0.38;
+  attackCooldown=.38;
 
   const sword =
     swordLevels[swordIndex];
 
-  let hit = false;
+  let hit=false;
 
   for (const enemy of enemies) {
 
@@ -1238,27 +1200,26 @@ function attack() {
       continue;
     }
 
-    const enemyDistance =
-      distance(duck, enemy);
+    if (
+      distance(duck,enemy)<=90
+    ) {
 
-    if (enemyDistance <= 82) {
+      enemy.hp -=
+        sword.damage;
 
-      enemy.hp -= sword.damage;
+      hit=true;
 
-      hit = true;
+      if (enemy.hp<=0) {
 
-      if (enemy.hp <= 0) {
-
-        enemy.hp = 0;
-        enemy.alive = false;
-
+        enemy.hp=0;
+        enemy.alive=false;
       }
     }
   }
 
   if (hit) {
 
-    trust += 5;
+    trust+=5;
 
     checkSwordUpgrade();
 
@@ -1269,8 +1230,8 @@ function attack() {
 function checkSwordUpgrade() {
 
   if (
-    swordIndex >=
-    swordLevels.length - 1
+    swordIndex>=
+    swordLevels.length-1
   ) {
     return;
   }
@@ -1278,13 +1239,12 @@ function checkSwordUpgrade() {
   const goal =
     swordLevels[swordIndex].goal;
 
-  if (trust < goal) {
+  if (trust<goal) {
     return;
   }
 
-  swordIndex += 1;
-
-  trust = 0;
+  swordIndex++;
+  trust=0;
 
   const sword =
     swordLevels[swordIndex];
@@ -1299,11 +1259,11 @@ function checkSwordUpgrade() {
 
       [
         'Duck 🦆',
-        sword.emoji +
-        ' You received the ' +
-        sword.name +
-        '! It deals ' +
-        sword.damage +
+        sword.emoji+
+        ' You received the '+
+        sword.name+
+        '! It deals '+
+        sword.damage+
         ' damage.'
       ]
     ],
@@ -1318,49 +1278,45 @@ function checkSwordUpgrade() {
 function checkOldManDeath() {
 
   if (
-    gameState === 'escort' &&
-    oldMan.hp <= 0 &&
+    gameState==='escort' &&
+    oldMan.hp<=0 &&
     oldMan.alive
   ) {
 
-    oldMan.alive = false;
+    oldMan.alive=false;
+    gameState='gameover';
 
-    gameState = 'gameover';
-
-    gameOverScreen.style.display =
-      'flex';
+    gameOverScreen.style.display='flex';
   }
 }
 
 function restartEscort() {
 
-  gameOverScreen.style.display =
-    'none';
+  gameOverScreen.style.display='none';
 
-  duck.x = 780;
-  duck.y = 780;
-  duck.hp = 100;
-  duck.invuln = 0;
+  duck.x=950;
+  duck.y=1570;
+  duck.hp=100;
+  duck.invuln=0;
 
-  oldMan.x = 850;
-  oldMan.y = 700;
-  oldMan.hp = 150;
-  oldMan.alive = true;
+  oldMan.x=950;
+  oldMan.y=1450;
+  oldMan.hp=150;
+  oldMan.alive=true;
 
-  swordIndex = 0;
-  trust = 0;
+  swordIndex=0;
+  trust=0;
 
   resetEnemies();
 
-  gameState = 'village';
+  gameState='village';
 
-  villagers.forEach(function(v) {
+  const oldManVillager =
+    villagers.find(
+      v=>v.special
+    );
 
-    if (v.special) {
-      v.talked = false;
-    }
-
-  });
+  oldManVillager.talked=false;
 
   objectiveEl.textContent =
     '🎯 Objective: Talk to the old man again.';
@@ -1386,14 +1342,12 @@ function restartEscort() {
 
     function() {
 
-      villagers.find(function(v) {
-        return v.special;
-      }).talked = true;
+      oldManVillager.talked=true;
 
-      gameState = 'escort';
+      gameState='escort';
 
       objectiveEl.textContent =
-        '🎯 Objective: Protect the old man and follow him to the mountain.';
+        '🎯 Objective: Protect the old man and follow him all the way to the distant mountain.';
 
       updateStats();
     }
@@ -1406,31 +1360,49 @@ function restartEscort() {
 function checkMountain() {
 
   if (
-    gameState !== 'escort' ||
+    gameState!=='escort' ||
     endingStarted
   ) {
     return;
   }
 
-  const nearMountain =
-    duck.x > mountain.x - 100 &&
-    duck.y > mountain.y - 120 &&
-    duck.x <
-      mountain.x +
-      mountain.w +
-      60 &&
-    duck.y <
-      mountain.y +
-      mountain.h +
-      60;
+  /*
+    Duck and old man both need to be near
+    the mountain.
+  */
 
-  if (!nearMountain) {
+  const duckNear =
+    duck.x >
+      mountain.x-180 &&
+    duck.y >
+      mountain.y-180 &&
+    duck.x <
+      mountain.x+
+      mountain.w+
+      120 &&
+    duck.y <
+      mountain.y+
+      mountain.h+
+      120;
+
+  const oldManNear =
+    distance(
+      oldMan,
+      {
+        x: mountain.x+120,
+        y: mountain.y+400
+      }
+    )<350;
+
+  if (
+    !duckNear ||
+    !oldManNear
+  ) {
     return;
   }
 
-  endingStarted = true;
-
-  gameState = 'ending';
+  endingStarted=true;
+  gameState='ending';
 
   startDialogue(
 
@@ -1442,21 +1414,17 @@ function checkMountain() {
 
       [
         'Duck 🦆',
-        'I found it! Finally!'
+        'We finally made it!'
       ],
 
       [
         'Narrator 📖',
-        'Duck reaches for the grape...'
+        'Duck reaches for the magical grape...'
       ]
     ],
 
     function() {
-
-      gameState = 'ending';
-
-      part2Screen.style.display =
-        'flex';
+      part2Screen.style.display='flex';
     }
 
   );
@@ -1466,90 +1434,213 @@ function update(dt) {
 
   handleMovement(dt);
 
-  if (duck.invuln > 0) {
-    duck.invuln -= dt;
+  if (duck.invuln>0) {
+    duck.invuln-=dt;
   }
 
-  if (attackCooldown > 0) {
-    attackCooldown -= dt;
+  if (attackCooldown>0) {
+    attackCooldown-=dt;
   }
 
+  updateOldMan(dt);
   updateEnemies(dt);
 
-  if (
-    oldMan.alive &&
-    gameState === 'escort'
-  ) {
-
-    const dx =
-      mountain.x - oldMan.x;
-
-    const dy =
-      mountain.y + 170 -
-      oldMan.y;
-
-    const distanceToMountain =
-      Math.hypot(dx, dy) || 1;
-
-    if (distanceToMountain > 120) {
-
-      const step =
-        oldMan.speed *
-        dt *
-        60;
-
-      moveEntity(
-        oldMan,
-        dx / distanceToMountain * step,
-        dy / distanceToMountain * step
-      );
-    }
-  }
-
   checkOldManDeath();
-
   checkVillagers();
-
   checkMountain();
 
   updateStats();
 
   const targetCameraX =
-    duck.x -
-    canvas.width / 2;
+    duck.x-
+    canvas.width/2;
 
   const targetCameraY =
-    duck.y -
-    canvas.height / 2;
+    duck.y-
+    canvas.height/2;
 
   camera.x +=
-    (targetCameraX - camera.x) *
-    0.1;
+    (
+      targetCameraX-
+      camera.x
+    )*.1;
 
   camera.y +=
-    (targetCameraY - camera.y) *
-    0.1;
+    (
+      targetCameraY-
+      camera.y
+    )*.1;
 
   camera.x =
     clamp(
       camera.x,
       0,
-      WORLD.width -
-        canvas.width
+      WORLD.width-
+      canvas.width
     );
 
   camera.y =
     clamp(
       camera.y,
       0,
-      WORLD.height -
-        canvas.height
+      WORLD.height-
+      canvas.height
     );
+}
+
+function drawHouse(house) {
+
+  // Shadow
+  ctx.fillStyle='rgba(0,0,0,.15)';
+
+  ctx.fillRect(
+    house.x+10,
+    house.y+12,
+    house.w,
+    house.h
+  );
+
+  // House
+  ctx.fillStyle='#f4c78b';
+
+  ctx.fillRect(
+    house.x,
+    house.y+45,
+    house.w,
+    house.h-45
+  );
+
+  // Roof
+  ctx.fillStyle='#c85d52';
+
+  ctx.beginPath();
+
+  ctx.moveTo(
+    house.x-20,
+    house.y+50
+  );
+
+  ctx.lineTo(
+    house.x+
+    house.w/2,
+    house.y-45
+  );
+
+  ctx.lineTo(
+    house.x+
+    house.w+
+    20,
+    house.y+50
+  );
+
+  ctx.closePath();
+
+  ctx.fill();
+
+  // Door
+  ctx.fillStyle='#74482f';
+
+  ctx.fillRect(
+    house.x+
+    house.w/2-
+    22,
+    house.y+
+    house.h-
+    80,
+    44,
+    80
+  );
+
+  // Windows
+  ctx.fillStyle='#8de1ff';
+
+  ctx.fillRect(
+    house.x+30,
+    house.y+75,
+    45,
+    40
+  );
+
+  ctx.fillRect(
+    house.x+
+    house.w-
+    75,
+    house.y+75,
+    45,
+    40
+  );
+
+  // Window crosses
+  ctx.strokeStyle='#ffffff';
+  ctx.lineWidth=3;
+
+  ctx.beginPath();
+
+  ctx.moveTo(
+    house.x+52,
+    house.y+75
+  );
+
+  ctx.lineTo(
+    house.x+52,
+    house.y+115
+  );
+
+  ctx.moveTo(
+    house.x+30,
+    house.y+95
+  );
+
+  ctx.lineTo(
+    house.x+75,
+    house.y+95
+  );
+
+  ctx.moveTo(
+    house.x+
+    house.w-
+    53,
+    house.y+75
+  );
+
+  ctx.lineTo(
+    house.x+
+    house.w-
+    53,
+    house.y+115
+  );
+
+  ctx.moveTo(
+    house.x+
+    house.w-
+    75,
+    house.y+95
+  );
+
+  ctx.lineTo(
+    house.x+
+    house.w-
+    30,
+    house.y+95
+  );
+
+  ctx.stroke();
+
+  ctx.font='28px Arial';
+
+  ctx.fillText(
+    '🏠',
+    house.x+
+    house.w/2-
+    15,
+    house.y-
+    8
+  );
 }
 
 function drawWorld() {
 
-  ctx.fillStyle = '#72c867';
+  ctx.fillStyle='#72c867';
 
   ctx.fillRect(
     0,
@@ -1565,22 +1656,22 @@ function drawWorld() {
     -camera.y
   );
 
-  // Grass
+  // Grass pattern
   for (
-    let x = 0;
-    x < WORLD.width;
-    x += 120
+    let x=0;
+    x<WORLD.width;
+    x+=120
   ) {
 
     for (
-      let y = 0;
-      y < WORLD.height;
-      y += 120
+      let y=0;
+      y<WORLD.height;
+      y+=120
     ) {
 
       ctx.fillStyle =
         (
-          (x / 120 + y / 120) % 2 === 0
+          (x/120+y/120)%2===0
         )
         ? 'rgba(255,255,255,.025)'
         : 'rgba(0,80,0,.025)';
@@ -1594,175 +1685,88 @@ function drawWorld() {
     }
   }
 
-  // Village paths
-  ctx.fillStyle = '#d8bb7b';
+  // Main road across the huge world
+  ctx.fillStyle='#d8bb7b';
 
   ctx.fillRect(
     0,
-    780,
+    1450,
     WORLD.width,
+    130
+  );
+
+  // Village road
+  ctx.fillRect(
+    250,
+    1000,
+    1900,
     120
   );
 
-  ctx.fillRect(
-    350,
-    350,
-    130,
-    700
-  );
-
   // Lemonade stand
-  ctx.fillStyle = '#fff4d2';
+  ctx.fillStyle='#fff4d2';
 
   ctx.fillRect(
-    170,
-    700,
-    210,
+    80,
+    1250,
+    220,
     115
   );
 
-  ctx.fillStyle = '#e85b5b';
+  ctx.fillStyle='#e85b5b';
 
   ctx.fillRect(
-    170,
-    700,
-    210,
+    80,
+    1250,
+    220,
     28
   );
 
-  ctx.fillStyle = '#3b2418';
+  ctx.fillStyle='#3b2418';
 
-  ctx.font = 'bold 22px Arial';
+  ctx.font='bold 21px Arial';
 
   ctx.fillText(
     '🍋 LEMONADE',
-    195,
-    760
+    105,
+    1310
   );
 
   ctx.fillText(
     'NO GRAPES!',
-    215,
-    790
+    110,
+    1340
   );
 
-  ctx.font = '46px Arial';
+  ctx.font='45px Arial';
 
   ctx.fillText(
     '🧑‍🍋',
-    235,
-    690
+    155,
+    1235
   );
 
-  // Mountain
-  ctx.fillStyle = '#70777e';
-
-  ctx.beginPath();
-
-  ctx.moveTo(
-    mountain.x,
-    mountain.y +
-      mountain.h
-  );
-
-  ctx.lineTo(
-    mountain.x + 170,
-    mountain.y
-  );
-
-  ctx.lineTo(
-    mountain.x +
-      mountain.w,
-    mountain.y +
-      mountain.h
-  );
-
-  ctx.closePath();
-
-  ctx.fill();
-
-  ctx.fillStyle = '#e9f0f4';
-
-  ctx.beginPath();
-
-  ctx.moveTo(
-    mountain.x + 170,
-    mountain.y
-  );
-
-  ctx.lineTo(
-    mountain.x + 105,
-    mountain.y + 145
-  );
-
-  ctx.lineTo(
-    mountain.x + 165,
-    mountain.y + 120
-  );
-
-  ctx.lineTo(
-    mountain.x + 220,
-    mountain.y + 165
-  );
-
-  ctx.closePath();
-
-  ctx.fill();
-
-  ctx.font =
-    'bold 24px Arial';
-
-  ctx.fillStyle = '#fff';
-
-  ctx.fillText(
-    'MAGICAL MOUNTAIN',
-    mountain.x + 42,
-    mountain.y +
-      mountain.h +
-      35
-  );
-
-  // Magical grape
-  if (grape.active) {
-
-    ctx.font =
-      '50px Arial';
-
-    ctx.fillText(
-      '🍇',
-      grape.x,
-      grape.y
-    );
-
-    ctx.font =
-      'bold 18px Arial';
-
-    ctx.fillStyle = '#fff';
-
-    ctx.fillText(
-      'MAGICAL GRAPE',
-      grape.x - 55,
-      grape.y + 38
-    );
+  // Houses
+  for (const villager of villagers) {
+    drawHouse(villager.house);
   }
 
-  // Obstacles
+  // Trees and rocks
   for (const obstacle of obstacles) {
 
-    if (obstacle.type === 'tree') {
+    if (obstacle.type==='tree') {
 
-      ctx.font =
-        '62px Arial';
+      ctx.font='65px Arial';
 
       ctx.fillText(
         '🌳',
         obstacle.x,
-        obstacle.y + 60
+        obstacle.y+65
       );
 
     } else {
 
-      ctx.fillStyle = '#777';
+      ctx.fillStyle='#777';
 
       ctx.fillRect(
         obstacle.x,
@@ -1771,16 +1775,116 @@ function drawWorld() {
         obstacle.h
       );
 
-      ctx.font =
-        '30px Arial';
+      ctx.font='30px Arial';
 
       ctx.fillText(
         '🪨',
-        obstacle.x + 15,
-        obstacle.y + 38
+        obstacle.x+15,
+        obstacle.y+40
       );
     }
   }
+
+  /*
+    VERY FAR MOUNTAIN
+  */
+
+  ctx.fillStyle='#646c75';
+
+  ctx.beginPath();
+
+  ctx.moveTo(
+    mountain.x,
+    mountain.y+
+    mountain.h
+  );
+
+  ctx.lineTo(
+    mountain.x+
+    mountain.w/2,
+    mountain.y
+  );
+
+  ctx.lineTo(
+    mountain.x+
+    mountain.w,
+    mountain.y+
+    mountain.h
+  );
+
+  ctx.closePath();
+
+  ctx.fill();
+
+  // Snow
+  ctx.fillStyle='#f2f5f7';
+
+  ctx.beginPath();
+
+  ctx.moveTo(
+    mountain.x+
+    mountain.w/2,
+    mountain.y
+  );
+
+  ctx.lineTo(
+    mountain.x+
+    mountain.w/2-
+    100,
+    mountain.y+
+    190
+  );
+
+  ctx.lineTo(
+    mountain.x+
+    mountain.w/2-
+    25,
+    mountain.y+
+    150
+  );
+
+  ctx.lineTo(
+    mountain.x+
+    mountain.w/2+
+    65,
+    mountain.y+
+    230
+  );
+
+  ctx.closePath();
+
+  ctx.fill();
+
+  ctx.font='bold 30px Arial';
+
+  ctx.fillStyle='#ffffff';
+
+  ctx.fillText(
+    '🏔️ MAGICAL MOUNTAIN',
+    mountain.x+55,
+    mountain.y+
+    mountain.h+
+    55
+  );
+
+  // Magical grape
+  ctx.font='60px Arial';
+
+  ctx.fillText(
+    '🍇',
+    grape.x,
+    grape.y
+  );
+
+  ctx.font='bold 20px Arial';
+
+  ctx.fillStyle='#ffffff';
+
+  ctx.fillText(
+    'MAGICAL GRAPE',
+    grape.x-60,
+    grape.y+45
+  );
 
   // Villagers
   for (const villager of villagers) {
@@ -1789,71 +1893,97 @@ function drawWorld() {
 
     ctx.fillStyle =
       villager.special
-        ? '#8b5a2b'
-        : '#5b7cfa';
+      ? '#8b5a2b'
+      : '#5b7cfa';
 
     ctx.arc(
       villager.x,
       villager.y,
       30,
       0,
-      Math.PI * 2
+      Math.PI*2
     );
 
     ctx.fill();
 
-    ctx.font =
-      '36px Arial';
+    ctx.font='36px Arial';
 
     ctx.fillText(
       villager.emoji,
-      villager.x - 19,
-      villager.y + 13
+      villager.x-19,
+      villager.y+13
     );
 
-    ctx.font =
-      'bold 15px Arial';
+    ctx.font='bold 15px Arial';
 
-    ctx.fillStyle = '#fff';
+    ctx.fillStyle='#ffffff';
 
     ctx.fillText(
       villager.name,
-      villager.x - 30,
-      villager.y - 38
+      villager.x-35,
+      villager.y-38
     );
 
     if (
       !villager.talked &&
-      gameState === 'village'
+      gameState==='village'
     ) {
 
-      ctx.font =
-        'bold 22px Arial';
+      ctx.font='bold 22px Arial';
 
-      ctx.fillStyle = '#ffe45c';
+      ctx.fillStyle='#ffe45c';
 
       ctx.fillText(
         '!',
-        villager.x - 5,
-        villager.y - 55
+        villager.x-5,
+        villager.y-55
       );
     }
   }
 
-  // Old man health
+  // Old Man
   if (
-    gameState === 'escort' &&
-    oldMan.alive
+    oldMan.alive &&
+    (
+      gameState==='escort' ||
+      gameState==='ending'
+    )
   ) {
 
-    drawHealthBar(
-      oldMan.x - 35,
-      oldMan.y - 48,
-      70,
-      8,
-      oldMan.hp /
-        oldMan.maxHp
+    ctx.font='48px Arial';
+
+    ctx.fillText(
+      '🧓',
+      oldMan.x-24,
+      oldMan.y+17
     );
+
+    drawHealthBar(
+      oldMan.x-38,
+      oldMan.y-48,
+      76,
+      8,
+      oldMan.hp/
+      oldMan.maxHp
+    );
+
+    /*
+      Little FOLLOWING marker makes it
+      easy to find the old man.
+    */
+    if (
+      gameState==='escort' &&
+      distance(oldMan,duck)>130
+    ) {
+
+      ctx.font='22px Arial';
+
+      ctx.fillText(
+        '👀',
+        oldMan.x-10,
+        oldMan.y-55
+      );
+    }
   }
 
   // Enemies
@@ -1863,52 +1993,50 @@ function drawWorld() {
       continue;
     }
 
-    ctx.font =
-      '42px Arial';
+    ctx.font='44px Arial';
 
     ctx.fillText(
       enemy.emoji,
-      enemy.x - 20,
-      enemy.y + 14
+      enemy.x-20,
+      enemy.y+14
     );
 
     drawHealthBar(
-      enemy.x - 30,
-      enemy.y - 36,
+      enemy.x-30,
+      enemy.y-38,
       60,
       7,
-      enemy.hp /
-        enemy.maxHp
+      enemy.hp/
+      enemy.maxHp
     );
   }
 
   // Duck
   ctx.globalAlpha =
-    duck.invuln > 0 &&
+    duck.invuln>0 &&
     Math.floor(
-      duck.invuln * 12
-    ) % 2 === 0
-      ? 0.45
+      duck.invuln*12
+    )%2===0
+      ? .45
       : 1;
 
-  ctx.font =
-    '48px Arial';
+  ctx.font='50px Arial';
 
   ctx.fillText(
     '🦆',
-    duck.x - 24,
-    duck.y + 17
+    duck.x-25,
+    duck.y+18
   );
 
-  ctx.globalAlpha = 1;
+  ctx.globalAlpha=1;
 
   drawHealthBar(
-    duck.x - 35,
-    duck.y - 45,
+    duck.x-35,
+    duck.y-45,
     70,
     8,
-    duck.hp /
-      duck.maxHp
+    duck.hp/
+    duck.maxHp
   );
 
   ctx.restore();
@@ -1923,10 +2051,9 @@ function drawHealthBar(
 ) {
 
   const p =
-    clamp(percent, 0, 1);
+    clamp(percent,0,1);
 
-  ctx.fillStyle =
-    'rgba(0,0,0,.65)';
+  ctx.fillStyle='rgba(0,0,0,.65)';
 
   ctx.fillRect(
     x,
@@ -1935,18 +2062,18 @@ function drawHealthBar(
     height
   );
 
-  if (p > 0.5) {
-    ctx.fillStyle = '#4be36a';
-  } else if (p > 0.25) {
-    ctx.fillStyle = '#ffd34d';
+  if (p>.5) {
+    ctx.fillStyle='#4be36a';
+  } else if (p>.25) {
+    ctx.fillStyle='#ffd34d';
   } else {
-    ctx.fillStyle = '#ff5252';
+    ctx.fillStyle='#ff5252';
   }
 
   ctx.fillRect(
     x,
     y,
-    width * p,
+    width*p,
     height
   );
 }
@@ -1959,11 +2086,11 @@ function gameLoop(timestamp) {
 
   const dt =
     Math.min(
-      0.033,
-      (timestamp - lastTime) / 1000 || 0
+      .033,
+      (timestamp-lastTime)/1000||0
     );
 
-  lastTime = timestamp;
+  lastTime=timestamp;
 
   if (gameStarted) {
     update(dt);
@@ -1976,13 +2103,13 @@ function gameLoop(timestamp) {
 
 window.addEventListener(
   'keydown',
-  function(event) {
+  event => {
 
-    keys[event.key] = true;
+    keys[event.key]=true;
 
     if (
-      event.key === ' ' ||
-      event.code === 'Space'
+      event.key===' ' ||
+      event.code==='Space'
     ) {
 
       event.preventDefault();
@@ -1994,22 +2121,21 @@ window.addEventListener(
 
 window.addEventListener(
   'keyup',
-  function(event) {
+  event => {
 
-    keys[event.key] = false;
+    keys[event.key]=false;
   }
 );
 
 startBtn.addEventListener(
   'click',
-  function() {
+  () => {
 
-    startScreen.style.display =
-      'none';
+    startScreen.style.display='none';
 
-    gameStarted = true;
+    gameStarted=true;
 
-    resetWorldForNewGame();
+    resetWorld();
 
     beginIntro();
   }
@@ -2017,9 +2143,9 @@ startBtn.addEventListener(
 
 restartBtn.addEventListener(
   'click',
-  function() {
+  () => {
 
-    gameStarted = true;
+    gameStarted=true;
 
     restartEscort();
   }
@@ -2027,53 +2153,59 @@ restartBtn.addEventListener(
 
 // Touch controls
 document
-  .querySelectorAll('.touchBtn')
-  .forEach(function(button) {
+.querySelectorAll('.touchBtn')
+.forEach(button => {
 
-    const key =
-      button.dataset.key;
+  const key =
+    button.dataset.key;
 
-    function press(event) {
+  button.addEventListener(
+    'pointerdown',
+    event => {
 
       event.preventDefault();
 
-      keys[key] = true;
+      keys[key]=true;
 
-      if (key === ' ') {
+      if (key===' ') {
         attack();
       }
     }
+  );
 
-    function release(event) {
+  button.addEventListener(
+    'pointerup',
+    event => {
 
       event.preventDefault();
 
-      keys[key] = false;
+      keys[key]=false;
     }
+  );
 
-    button.addEventListener(
-      'pointerdown',
-      press
-    );
+  button.addEventListener(
+    'pointercancel',
+    event => {
 
-    button.addEventListener(
-      'pointerup',
-      release
-    );
+      event.preventDefault();
 
-    button.addEventListener(
-      'pointercancel',
-      release
-    );
+      keys[key]=false;
+    }
+  );
 
-    button.addEventListener(
-      'pointerleave',
-      release
-    );
-  });
+  button.addEventListener(
+    'pointerleave',
+    event => {
+
+      event.preventDefault();
+
+      keys[key]=false;
+    }
+  );
+
+});
 
 resetEnemies();
-
 updateStats();
 
 requestAnimationFrame(gameLoop);
